@@ -22,7 +22,7 @@ export default class Start extends React.Component {
 
     // state will be updated with whatever values change for the specific states
     this.state = {
-      name: '',
+      username: '',
       bgColor: this.colors.blue
     };
   }
@@ -34,10 +34,10 @@ export default class Start extends React.Component {
 
   // background colors to choose from; will be used to update bgColor state for easier referencing
   colors = {
-    beige: "#DCDBC4",
-    grey: "#B1B1A3",
-    blue: "#97C1DE",
-    blush: "#B5998B"
+    color1: "#1F4666",
+    color2: "#66561F",
+    color3: "#B7501B",
+    color4: "#887818"
   };
 
   render() {
@@ -60,8 +60,8 @@ export default class Start extends React.Component {
               <Image source={icon} style={styles.image} />
               <TextInput
                 style={styles.input}
-                onChangeText={(text) => this.setState({ name: text })}
-                value={this.state.name}
+                onChangeText={(text) => this.setState({ username: text })}
+                value={this.state.username}
                 placeholder='Your Name'
               />
             </View>
@@ -71,35 +71,53 @@ export default class Start extends React.Component {
             </View>
 
             <View style={styles.colorList}>
+
               <TouchableOpacity
-                accesible={true}
-                style={styles.beige}
-                onPress={() => this.changeBgColor(this.colors.beige)}>
+                accesible= {true}
+                accessibilityLabel= "color1"
+                accessibilityHint= "color1beige as the background"
+                accessibilityRole= "button"
+                style= {styles.color1}
+                onPress={() => this.changeBgColor(this.colors.color1)}>
               </TouchableOpacity>
 
               <TouchableOpacity
-                accesible={true}
-                style={styles.grey}
-                onPress={() => this.changeBgColor(this.colors.grey)}>
+                accesible= {true}
+                accessibilityLabel= "color2"
+                accessibilityHint= "color2 as the background"
+                accessibilityRole= "button"
+                style= {styles.color2}
+                onPress={() => this.changeBgColor(this.colors.color2)}>
               </TouchableOpacity>
 
               <TouchableOpacity
-                accesible={true}
-                style={styles.blue}
-                onPress={() => this.changeBgColor(this.colors.blue)}>
+                accesible= {true}
+                accessibilityLabel= "color3"
+                accessibilityHint= "color3 as the background"
+                accessibilityRole= "button"
+                style= {styles.color3}
+                onPress={() => this.changeBgColor(this.colors.color3)}>
               </TouchableOpacity>
 
               <TouchableOpacity
-                accesible={true}
-                style={styles.blush}
-                onPress={() => this.changeBgColor(this.colors.blush)}>
+                accesible= {true}
+                accessibilityLabel= "color4"
+                accessibilityHint= "color4 as the background"
+                accessibilityRole= "button"
+                style= {styles.color4}
+                onPress={() => this.changeBgColor(this.colors.color4)}>
               </TouchableOpacity>
+
             </View>
 
             <Pressable
+              accessible={true}
+              acccessibilityLabel =  "Chatroom"
+              accessibilityHint= "let you enter the Chatroom"
+              accessibilityRole = ""
               style={styles.button}
               onPress={() => this.props.navigation.navigate('Chat', {
-                name: this.state.name,
+                username: this.state.username,
                 bgColor: this.state.bgColor
               })}>
 
@@ -144,7 +162,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "700",
     textTransform: "lowercase",
-    color:"#5E530A"
+    color: "#5E530A"
   },
 
   box: {
@@ -201,29 +219,29 @@ const styles = StyleSheet.create({
     paddingRight: 0
   },
 
-  beige: {
-    backgroundColor: "#DCDBC4",
+  color1: {
+    backgroundColor: "#1F4666",
     width: 50,
     height: 50,
     borderRadius: 10
   },
 
-  grey: {
-    backgroundColor: "#B1B1A3",
+  color2: {
+    backgroundColor: "#66561F",
     width: 50,
     height: 50,
     borderRadius: 10
   },
 
-  blue: {
-    backgroundColor: "#97C1DE",
+  color3: {
+    backgroundColor: "#B7501B",
     width: 50,
     height: 50,
     borderRadius: 10
   },
 
-  blush: {
-    backgroundColor: "#B5998B",
+  color4: {
+    backgroundColor: "#887818",
     width: 50,
     height: 50,
     borderRadius: 10
