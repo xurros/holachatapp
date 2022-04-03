@@ -75,7 +75,7 @@ export default class Start extends React.Component {
               <TouchableOpacity
                 accesible= {true}
                 accessibilityLabel= "color1"
-                accessibilityHint= "color1beige as the background"
+                accessibilityHint= "color1 as the background"
                 accessibilityRole= "button"
                 style= {styles.color1}
                 onPress={() => this.changeBgColor(this.colors.color1)}>

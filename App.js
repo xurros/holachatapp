@@ -1,4 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
+import React from "react";
+
+// import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Start from "./components/Start";
 import Chat from "./components/Chat";
@@ -7,7 +9,8 @@ import "react-native-gesture-handler";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import React from "react";
+import "@react-navigation/native-stack";
+
 
 // create navigator
 const Stack = createStackNavigator();
@@ -37,8 +40,8 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
