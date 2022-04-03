@@ -20,10 +20,10 @@ export default class Start extends React.Component {
   constructor(props) {
     super(props);
 
-    // state will be updated with whatever values change for the specific states
+    // default background color
     this.state = {
-      username: '',
-      bgColor: this.colors.blue
+      username: "",
+      bgColor: this.colors.blue,
     };
   }
 
@@ -34,15 +34,15 @@ export default class Start extends React.Component {
 
   // background colors to choose from; will be used to update bgColor state for easier referencing
   colors = {
-    color1: "#1F4666",
-    color2: "#66561F",
-    color3: "#B7501B",
-    color4: "#887818"
+    sea: "#1F4666",
+    bark: "#66561F",
+    rogue: "#B7501B",
+    olive: "#887818"
   };
 
   render() {
     return (
-      //Different components do differents things; View acts as a div from html
+      //Different components do differents things; View acts as a div in html form
       <View style={styles.container}>
 
         <ImageBackground
@@ -57,7 +57,7 @@ export default class Start extends React.Component {
 
           <View style={styles.box}>
             <View style={styles.inputBox}>
-              <Image source={icon} style={styles.image} />
+              <Image source={icon} style={styles.icon} />
               <TextInput
                 style={styles.input}
                 onChangeText={(text) => this.setState({ username: text })}
@@ -78,7 +78,7 @@ export default class Start extends React.Component {
                 accessibilityHint= "color1 as the background"
                 accessibilityRole= "button"
                 style= {styles.color1}
-                onPress={() => this.changeBgColor(this.colors.color1)}>
+                onPress={() => this.changeBgColor(this.colors.sea)}>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -87,7 +87,7 @@ export default class Start extends React.Component {
                 accessibilityHint= "color2 as the background"
                 accessibilityRole= "button"
                 style= {styles.color2}
-                onPress={() => this.changeBgColor(this.colors.color2)}>
+                onPress={() => this.changeBgColor(this.colors.bark)}>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -96,7 +96,7 @@ export default class Start extends React.Component {
                 accessibilityHint= "color3 as the background"
                 accessibilityRole= "button"
                 style= {styles.color3}
-                onPress={() => this.changeBgColor(this.colors.color3)}>
+                onPress={() => this.changeBgColor(this.colors.rogue)}>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -105,7 +105,7 @@ export default class Start extends React.Component {
                 accessibilityHint= "color4 as the background"
                 accessibilityRole= "button"
                 style= {styles.color4}
-                onPress={() => this.changeBgColor(this.colors.color4)}>
+                onPress={() => this.changeBgColor(this.colors.olive)}>
               </TouchableOpacity>
 
             </View>
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
 
   colorText: {
     fontSize: 16,
-    marginLeft: "60",
+    marginLeft: 60,
     fontWeight: "300",
     textTransform: "lowercase",
     color: '#757083',

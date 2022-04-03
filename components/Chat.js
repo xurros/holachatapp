@@ -62,8 +62,7 @@ export default class Chat extends React.Component {
 
   render() {
     //entered name state from Start screen gets  displayed in status bar at the top of the app
-    const username = this.props.route.params.username;
-    this.props.navigation.setOptions({ title: username });
+    
 
     const { bgColor } = this.props.route.params;
 
