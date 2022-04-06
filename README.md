@@ -196,7 +196,6 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [forks-url]: https://github.com/xurros/holachatapp
 [stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
 [stars-url]: https://github.com/github_username/repo_name/stargazers
