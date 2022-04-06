@@ -1,7 +1,7 @@
 # holachatapp
 
 [![Contributors][contributors-shield]][contributors-url]
-[![Forkies](https://www.google.com "Google's Homepage")
+[![Forks][forks-shield]][https://www.google.com]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
