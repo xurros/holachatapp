@@ -1,9 +1,8 @@
 # holachatapp
 
 
-<div id="top"></div>
 [![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]]:https://www.google.com
+[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
