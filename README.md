@@ -1,7 +1,7 @@
 # holachatapp
 
 [![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
+[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
