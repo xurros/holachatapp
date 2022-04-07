@@ -51,8 +51,8 @@ export default class Start extends React.Component {
           style={styles.bgImage}>
 
           <View style={styles.titleBox}>
-            <Text style={styles.titleText}>HOLA!</Text>
-            <Text style={styles.miniText}>chat-app</Text>
+            <Text style={styles.titleText}></Text>
+            <Text style={styles.miniText}></Text>
           </View>
 
           <View style={styles.box}>
@@ -73,38 +73,38 @@ export default class Start extends React.Component {
             <View style={styles.colorList}>
 
               <TouchableOpacity
-                accesible= {true}
-                accessibilityLabel= "color1"
-                accessibilityHint= "color1 as the background"
-                accessibilityRole= "button"
-                style= {styles.color1}
+                accesible={true}
+                accessibilityLabel="color1"
+                accessibilityHint="color1 as the background"
+                accessibilityRole="button"
+                style={styles.color1}
                 onPress={() => this.changeBgColor(this.colors.sea)}>
               </TouchableOpacity>
 
               <TouchableOpacity
-                accesible= {true}
-                accessibilityLabel= "color2"
-                accessibilityHint= "color2 as the background"
-                accessibilityRole= "button"
-                style= {styles.color2}
+                accesible={true}
+                accessibilityLabel="color2"
+                accessibilityHint="color2 as the background"
+                accessibilityRole="button"
+                style={styles.color2}
                 onPress={() => this.changeBgColor(this.colors.bark)}>
               </TouchableOpacity>
 
               <TouchableOpacity
-                accesible= {true}
-                accessibilityLabel= "color3"
-                accessibilityHint= "color3 as the background"
-                accessibilityRole= "button"
-                style= {styles.color3}
+                accesible={true}
+                accessibilityLabel="color3"
+                accessibilityHint="color3 as the background"
+                accessibilityRole="button"
+                style={styles.color3}
                 onPress={() => this.changeBgColor(this.colors.rogue)}>
               </TouchableOpacity>
 
               <TouchableOpacity
-                accesible= {true}
-                accessibilityLabel= "color4"
-                accessibilityHint= "color4 as the background"
-                accessibilityRole= "button"
-                style= {styles.color4}
+                accesible={true}
+                accessibilityLabel="color4"
+                accessibilityHint="color4 as the background"
+                accessibilityRole="button"
+                style={styles.color4}
                 onPress={() => this.changeBgColor(this.colors.olive)}>
               </TouchableOpacity>
 
@@ -112,9 +112,9 @@ export default class Start extends React.Component {
 
             <Pressable
               accessible={true}
-              acccessibilityLabel =  "Chatroom"
-              accessibilityHint= "let you enter the Chatroom"
-              accessibilityRole = ""
+              acccessibilityLabel="Chatroom"
+              accessibilityHint="let you enter the Chatroom"
+              accessibilityRole=""
               style={styles.button}
               onPress={() => this.props.navigation.navigate('Chat', {
                 username: this.state.username,
