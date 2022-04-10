@@ -14,10 +14,12 @@ import {
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
+import { initializeApp } from "firebase/app";
+
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from "@react-native-community/netinfo";
 
-import { initializeApp } from "firebase/app";
 
 
 // Configuration link to Firestone so your app can connect with the database 
@@ -28,7 +30,7 @@ const firebaseConfig = {
   storageBucket: "holachatapp-bcd90.appspot.com",
   messagingSenderId: "758351531581",
   appId: "1:758351531581:web:d903d47c6f5a58ab3ca454",
-  // measurementId: "G-17F6YGEXPK",
+  measurementId: "G-17F6YGEXPK",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -39,7 +41,7 @@ export default class Chat extends React.Component {
     super();
     this.state = {
       messages: [],
-      uid: "",
+      uid: 0,
       user: {
         _id: "",
         username: "",
@@ -55,26 +57,29 @@ export default class Chat extends React.Component {
 
     // Firestone database message collection
     this.referenceChatMessages = firebase.firestore().collection("messages");
+    this.refMsgsUser = null;
   }
 
   async getMessages() {
-    let messages = "";
+    const messages = "";
     try {
-      messages = await AsyncStorage.getItem("messages") || [];
+      messages = (await AsyncStorage.getItem("messages")) || [];
       this.setState({
-        messages: JSON.parse(messages)
+        messages: JSON.parse(messages),
       });
     } catch (error) {
+      alert(error);
       console.log(error.message);
     }
   };
 
   async saveMessages() {
     try {
-      await AsyncStorage
-      .setItem(
-        "messages", JSON.stringify(this.state.messages));
+      await AsyncStorage.setItem(
+        "messages",
+        JSON.stringify(this.state.messages));
     } catch (error) {
+      alert(error);
       console.log(error.message);
     }
   };
@@ -84,7 +89,7 @@ export default class Chat extends React.Component {
       await AsyncStorage.removeItem("messages");
       this.setState({
         messages: []
-      })
+      });
     } catch (error) {
       console.log(error.message);
     }
@@ -95,7 +100,7 @@ export default class Chat extends React.Component {
 
     // go through each document
     QuerySnapshot.forEach((doc) => {
-      const data = doc.data();
+      let data = doc.data();
 
       messages.push({
         _id: data._id,
@@ -111,6 +116,7 @@ export default class Chat extends React.Component {
     this.setState({
       messages: messages,
     });
+    this.saveMessages();
   };
 
   componentDidMount() {
@@ -120,7 +126,7 @@ export default class Chat extends React.Component {
       if (connection.isConnected) {
         this.setState({ isConnected: true });
         console.log("online");
-     
+
 
         this.unsubscribe = this.referenceChatMessages
           .orderBy("createdAt", "desc")
@@ -139,7 +145,8 @@ export default class Chat extends React.Component {
               messages: [],
               user: {
                 _id: "",
-                username: username,
+                text: "Hola" + " " + username + "!",
+                createdAt: new Date(),
                 avatar: "https://joeschmoe.io/api/v1/random",
               },
             });
@@ -150,7 +157,6 @@ export default class Chat extends React.Component {
               .collection("messages")
               .where("uid", "==", this.state.uid);
           });
-
         // save messages locally
         this.saveMessages();
       } else {
@@ -202,16 +208,15 @@ export default class Chat extends React.Component {
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: "#B51152"
+            backgroundColor: "#"
           },
           left: {
-            backgroundColor: "#1E7186"
+            backgroundColor: "#"
           }
         }}
       />
     )
   }
-
 
   renderInputToolbar(props) {
     if (this.state.isConnected == false) {
@@ -227,7 +232,6 @@ export default class Chat extends React.Component {
 
   render() {
     //entered name state from Start screen gets  displayed in status bar at the top of the app
-
 
     const { bgColor } = this.props.route.params;
 
