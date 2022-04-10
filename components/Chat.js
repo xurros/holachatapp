@@ -135,10 +135,10 @@ export default class Chat extends React.Component {
             }
 
             this.setState({
-              uid: user.uid,
+              uid: "",
               messages: [],
               user: {
-                _id: user.uid,
+                _id: "",
                 username: username,
                 avatar: "https://joeschmoe.io/api/v1/random",
               },
@@ -214,7 +214,7 @@ export default class Chat extends React.Component {
 
 
   renderInputToolbar(props) {
-    if (this.state.inConnected == false) {
+    if (this.state.isConnected == false) {
     } else {
 
       return (
