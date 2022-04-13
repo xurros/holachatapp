@@ -16,13 +16,11 @@ import "firebase/compat/firestore";
 import "firebase/compat/auth";
 import { initializeApp } from "firebase/app";
 
-
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from "@react-native-community/netinfo";
 
 
-
-// Configuration link to Firestone so your app can connect with the database 
+// Configuration link to Firestore so your app can connect with the database 
 const firebaseConfig = {
   apiKey: "AIzaSyAgz64iBeR5MYHM_QXlZMJHbSAU2wfzcKg",
   authDomain: "holachatapp-bcd90.firebaseapp.com",
@@ -55,11 +53,12 @@ export default class Chat extends React.Component {
       firebase.initializeApp(firebaseConfig);
     }
 
-    // Firestone database message collection
+    // Firestore database message collection
     this.referenceChatMessages = firebase.firestore().collection("messages");
     this.refMsgsUser = null;
   }
 
+  // get string messages from local storage, then parse to JSON format
   async getMessages() {
     const messages = "";
     try {
@@ -73,6 +72,7 @@ export default class Chat extends React.Component {
     }
   };
 
+  // save JSON messages to local storage in string format
   async saveMessages() {
     try {
       await AsyncStorage.setItem(
@@ -84,6 +84,7 @@ export default class Chat extends React.Component {
     }
   };
 
+  // delete messages from local storage
   async deleteMessages() {
     try {
       await AsyncStorage.removeItem("messages");
@@ -147,7 +148,7 @@ export default class Chat extends React.Component {
                 _id: "",
                 text: "Hola" + " " + username + "!",
                 createdAt: new Date(),
-                avatar: "https://joeschmoe.io/api/v1/random",
+                avatar: "https://joeschmoe.io/api/v1/140/",
               },
             });
 
@@ -157,12 +158,16 @@ export default class Chat extends React.Component {
               .collection("messages")
               .where("uid", "==", this.state.uid);
           });
-        // save messages locally
+
+        // save messages locally ( save messages locally to AsyncStorage)
         this.saveMessages();
       } else {
+
         // if the user is offline
         this.setState({ isConnected: false });
         console.log("offline");
+
+        //retrieve chat from asyncstorage
         this.getMessages();
       }
     });
@@ -180,7 +185,7 @@ export default class Chat extends React.Component {
     });
   }
 
-  //addMessage function
+  //addMessage function (Add messages to database)
   addMessage() {
     const message = this.state.messages[0];
     // add a new message to the collection
@@ -192,32 +197,38 @@ export default class Chat extends React.Component {
     });
   }
 
+  //attaches messages to chat
   onSend(messages = []) {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages),
     }),
       () => {
+        // add to db
         this.addMessage();
+
+        //  add to local storage
         this.saveMessages();
       });
   }
 
+  //customizes text bubbles
   renderBubble(props) {
     return (
       <Bubble
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: "#"
+            backgroundColor: "#C1CB92"
           },
           left: {
-            backgroundColor: "#"
+            backgroundColor: "#e2e5e9"
           }
         }}
       />
     )
   }
 
+  //customizes input toolbar if online
   renderInputToolbar(props) {
     if (this.state.isConnected == false) {
     } else {
@@ -245,10 +256,14 @@ export default class Chat extends React.Component {
         <GiftedChat
           messages={this.state.messages}
           onSend={(messages) => this.onSend(messages)}
+          renderBubble={this.renderBubble.bind(this)}
+          renderInputToolbar={this.renderInputToolbar.bind(this)}
+          isConnected={this.state.isConnected}
+
           user={{
             _id: this.state.user._id,
             username: this.state.username,
-            avatar: this.state.user.avatar,
+            avatar: "https://joeschmoe.io/api/v1/140/",
           }}
         />
 
