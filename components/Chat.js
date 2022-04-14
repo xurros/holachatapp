@@ -18,6 +18,8 @@ import { initializeApp } from "firebase/app";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from "@react-native-community/netinfo";
+// import CustomActions from "./CustomActions";
+// import MapView from "react-native-maps";
 
 
 // Configuration link to Firestore so your app can connect with the database 
@@ -55,14 +57,13 @@ export default class Chat extends React.Component {
 
     // Firestore database message collection
     this.referenceChatMessages = firebase.firestore().collection("messages");
-    this.refMsgsUser = null;
   }
 
   // get string messages from local storage, then parse to JSON format
-  async getMessages() {
-    const messages = "";
+ getMessages = async() => {
+    let messages = "";
     try {
-      messages = (await AsyncStorage.getItem("messages")) || [];
+      messages = (await AsyncStorage.getItem("messages")) || "none";
       this.setState({
         messages: JSON.parse(messages),
       });
@@ -70,6 +71,7 @@ export default class Chat extends React.Component {
       alert(error);
       console.log(error.message);
     }
+    return messages;
   };
 
   // save JSON messages to local storage in string format
@@ -105,7 +107,7 @@ export default class Chat extends React.Component {
 
       messages.push({
         _id: data._id,
-        text: data.text.toString(),
+        text: data.text,
         createdAt: data.createdAt.toDate(),
         user: {
           _id: data.user._id,
@@ -125,9 +127,8 @@ export default class Chat extends React.Component {
 
     NetInfo.fetch().then(connection => {
       if (connection.isConnected) {
-        this.setState({ isConnected: true });
+        // this.setState({ isConnected: true });
         console.log("online");
-
 
         this.unsubscribe = this.referenceChatMessages
           .orderBy("createdAt", "desc")
@@ -142,22 +143,25 @@ export default class Chat extends React.Component {
             }
 
             this.setState({
-              uid: "",
+              uid: user.uid,
               messages: [],
               user: {
-                _id: "",
+                _id: user.uid,
+                username: username,
                 text: "Hola" + " " + username + "!",
                 createdAt: new Date(),
-                avatar: "https://joeschmoe.io/api/v1/140/",
+                avatar: "https://joeschmoe.io/api/v1/random/",
               },
+              isConnected: true,
+            });
             });
 
             //messages for current user
-            this.refMsgsUser = firebase
-              .firestore()
-              .collection("messages")
-              .where("uid", "==", this.state.uid);
-          });
+          //   this.refMsgsUser = firebase
+          //     .firestore()
+          //     .collection("messages")
+          //     .where("uid", "==", this.state.uid);
+          // });
 
         // save messages locally ( save messages locally to AsyncStorage)
         this.saveMessages();
@@ -241,8 +245,36 @@ export default class Chat extends React.Component {
     }
   }
 
+  renderCustomActions = (props) => {
+    return <CustomActions {...props} />;
+  };
+
+  renderCustomView(props) {
+    const { currentMessage } = props;
+    if (currentMessage.location) {
+      return (
+        <MapView
+          style={{
+            width: 150,
+            height: 100,
+            borderRadius: 13,
+            margin: 3
+          }}
+          region={{
+            latitude: currentMessage.location.latitude,
+            longitude: currentMessage.location.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
+      );
+    }
+    return null;
+  }
+
   render() {
     //entered name state from Start screen gets  displayed in status bar at the top of the app
+    const username = this.props.route.params.username;
 
     const { bgColor } = this.props.route.params;
 
@@ -259,11 +291,13 @@ export default class Chat extends React.Component {
           renderBubble={this.renderBubble.bind(this)}
           renderInputToolbar={this.renderInputToolbar.bind(this)}
           isConnected={this.state.isConnected}
+          // renderActions={this.renderCustomActions}
+          // renderCustomView={this.renderCustomView}
 
           user={{
             _id: this.state.user._id,
             username: this.state.username,
-            avatar: "https://joeschmoe.io/api/v1/140/",
+            avatar: "https://joeschmoe.io/api/v1/random/",
           }}
         />
 
@@ -274,6 +308,7 @@ export default class Chat extends React.Component {
         }
 
       </View >
+      
     );
   }
 }
