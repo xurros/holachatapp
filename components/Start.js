@@ -34,17 +34,19 @@ export default class Start extends React.Component {
 
   // background colors to choose from; will be used to update bgColor state for easier referencing
   colors = {
-    sea: "#1F4666",
-    bark: "#66561F",
-    rogue: "#B7501B",
-    olive: "#887818"
+    earl: "#a4998c",
+    // smoke: "#6E7376",
+    // honey: "#d8b26e",
+    mocha: "#514c4a",
+    grass: "#3f5843",
+    // rose: "#cebeb9"
+    orange: "#c78a44"
   };
 
   render() {
     return (
       //Different components do differents things; View acts as a div in html form
       <View style={styles.container}>
-
         <ImageBackground
           source={bgImage}
           resizeMode="cover"
@@ -78,7 +80,7 @@ export default class Start extends React.Component {
                 accessibilityHint="color1 as the background"
                 accessibilityRole="button"
                 style={styles.color1}
-                onPress={() => this.changeBgColor(this.colors.sea)}>
+                onPress={() => this.changeBgColor(this.colors.earl)}>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -87,7 +89,7 @@ export default class Start extends React.Component {
                 accessibilityHint="color2 as the background"
                 accessibilityRole="button"
                 style={styles.color2}
-                onPress={() => this.changeBgColor(this.colors.bark)}>
+                onPress={() => this.changeBgColor(this.colors.mocha)}>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -96,7 +98,7 @@ export default class Start extends React.Component {
                 accessibilityHint="color3 as the background"
                 accessibilityRole="button"
                 style={styles.color3}
-                onPress={() => this.changeBgColor(this.colors.rogue)}>
+                onPress={() => this.changeBgColor(this.colors.grass)}>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -105,7 +107,7 @@ export default class Start extends React.Component {
                 accessibilityHint="color4 as the background"
                 accessibilityRole="button"
                 style={styles.color4}
-                onPress={() => this.changeBgColor(this.colors.olive)}>
+                onPress={() => this.changeBgColor(this.colors.orange)}>
               </TouchableOpacity>
 
             </View>
@@ -132,7 +134,6 @@ export default class Start extends React.Component {
     )
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -152,6 +153,7 @@ const styles = StyleSheet.create({
     paddingTop: 120
   },
 
+  //  for the title page before entering the chatroom
   titleText: {
     fontSize: 45,
     fontWeight: "700",
@@ -162,7 +164,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "700",
     textTransform: "lowercase",
-    color: "#5E530A"
+    color: "#5E530A",
   },
 
   box: {
@@ -174,6 +176,8 @@ const styles = StyleSheet.create({
   },
 
   inputBox: {
+    marginTop: 30,
+    marginBottom: 20,
     borderWidth: 2,
     borderRadius: 1,
     borderColor: "#B1B1A3",
@@ -192,8 +196,7 @@ const styles = StyleSheet.create({
 
   input: {
     fontSize: 16,
-    fontWeight: "500",
-    textTransform: "lowercase",
+    fontWeight: "400",
     opacity: 0.5,
   },
 
@@ -203,13 +206,16 @@ const styles = StyleSheet.create({
     width: '88%'
   },
 
+// color for wording "Pick a Background"
   colorText: {
+    fontFamily: "Jost",
     fontSize: 16,
-    marginLeft: 60,
-    fontWeight: "300",
+    fontWeight: "400",
     textTransform: "lowercase",
-    color: '#757083',
-    opacity: 1,
+    // color: "#757083",
+    color: "#BF1B49",
+    textAlign: "center",
+
   },
 
   colorList: {
@@ -220,44 +226,65 @@ const styles = StyleSheet.create({
   },
 
   color1: {
-    backgroundColor: "#1F4666",
-    width: 50,
+    backgroundColor: "#a4998c",
+    borderRadius: 20,
+    marginTop: 10,
+    flexDirection: "row",
+    width: 30,
     height: 50,
-    borderRadius: 10
   },
 
   color2: {
-    backgroundColor: "#66561F",
-    width: 50,
+    backgroundColor: "#514c4a",
+    borderRadius: 20,
+    marginTop: 10,
+    flexDirection: "row",
+    width: 30,
     height: 50,
-    borderRadius: 10
   },
 
   color3: {
-    backgroundColor: "#B7501B",
-    width: 50,
+    backgroundColor: "#3f5843",
+    borderRadius: 20,
+    marginTop: 10,
+    flexDirection: "row",
+    width: 30,
     height: 50,
-    borderRadius: 10
   },
 
   color4: {
-    backgroundColor: "#887818",
-    width: 50,
+    backgroundColor: "#c78a44",
+    borderRadius: 20,
+    marginTop: 10,
+    flexDirection: "row",
+    width: 30,
     height: 50,
-    borderRadius: 10
   },
 
   button: {
+    marginTop: "10%",
     width: "80%",
     height: 70,
-    backgroundColor: "#EC8713",
-    alignItems: 'center',
-    justifyContent: 'center'
+    // backgroundColor: "#EC8713",
+    backgroundColor: "#d8b26e",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 5,
   },
 
   buttonText: {
     color: "#FFFFFF",
     fontSize: 16,
     fontWeight: "600"
-  }
+  },
+
+  box: {
+    alignItems: "center",
+    backgroundColor: "#e1dad2",
+    alignSelf: "auto",
+    borderRadius: 25,
+    flexDirection: "column",
+    height: 350,
+    width: 350,
+  },
 });

@@ -18,8 +18,8 @@ import { initializeApp } from "firebase/app";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from "@react-native-community/netinfo";
-// import CustomActions from "./CustomActions";
-// import MapView from "react-native-maps";
+import CustomActions from "./CustomActions";
+import MapView from "react-native-maps";
 
 
 // Configuration link to Firestore so your app can connect with the database 
@@ -127,7 +127,6 @@ export default class Chat extends React.Component {
 
     NetInfo.fetch().then(connection => {
       if (connection.isConnected) {
-        // this.setState({ isConnected: true });
         console.log("online");
 
         this.unsubscribe = this.referenceChatMessages
@@ -143,10 +142,10 @@ export default class Chat extends React.Component {
             }
 
             this.setState({
-              uid: user.uid,
+              uid: "",
               messages: [],
               user: {
-                _id: user.uid,
+                _id: "",
                 username: username,
                 text: "Hola" + " " + username + "!",
                 createdAt: new Date(),
@@ -156,12 +155,6 @@ export default class Chat extends React.Component {
             });
             });
 
-            //messages for current user
-          //   this.refMsgsUser = firebase
-          //     .firestore()
-          //     .collection("messages")
-          //     .where("uid", "==", this.state.uid);
-          // });
 
         // save messages locally ( save messages locally to AsyncStorage)
         this.saveMessages();
@@ -222,10 +215,10 @@ export default class Chat extends React.Component {
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: "#C1CB92"
+            backgroundColor: "#85837B"
           },
           left: {
-            backgroundColor: "#e2e5e9"
+            backgroundColor: "#EAE6DF"
           }
         }}
       />
@@ -274,7 +267,6 @@ export default class Chat extends React.Component {
 
   render() {
     //entered name state from Start screen gets  displayed in status bar at the top of the app
-    const username = this.props.route.params.username;
 
     const { bgColor } = this.props.route.params;
 
@@ -282,7 +274,7 @@ export default class Chat extends React.Component {
 
       <View style={{
         flex: 1,
-        backgroundColor: bgColor
+        backgroundColor: bgColor,
       }} >
 
         <GiftedChat
@@ -291,8 +283,8 @@ export default class Chat extends React.Component {
           renderBubble={this.renderBubble.bind(this)}
           renderInputToolbar={this.renderInputToolbar.bind(this)}
           isConnected={this.state.isConnected}
-          // renderActions={this.renderCustomActions}
-          // renderCustomView={this.renderCustomView}
+          renderActions={this.renderCustomActions}
+          renderCustomView={this.renderCustomView}
 
           user={{
             _id: this.state.user._id,
