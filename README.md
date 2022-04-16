@@ -1,8 +1,8 @@
 # holachatapp
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%23D546AB&lines=hello!;thank+you+for+visiting;holachat+app+repo)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%23D546AB&lines=hello!;welcome+to+my+github+repo;holachat+app)](https://git.io/typing-svg)
 
-<h5>holachatapp</h5> is the product based on React Native. It's supposed to emulate a messenger app.
+It is the product based on React Native. It's supposed to emulate the messenger app.
 This app provides users with a chat interface and options to share images and their location.
 
 ## 🛠️ Build Tools
@@ -42,4 +42,8 @@ $ npm install --global expo-cli
 $ expo start
 ```
 
+<p align="center" >
+ <img src="https://media.giphy.com/media/Fh2hGAt0zUzwKEFRoW/giphy.gif"  width="5%" border-radius="50%"> 
+</p>
 
+<hr>
