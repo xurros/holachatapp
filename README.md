@@ -2,7 +2,7 @@
 
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%23D546AB&lines=hello!;thank+you+for+visiting;holachat+app+repo)](https://git.io/typing-svg)
 
-**holachatapp** is the product based on React Native. It's supposed to emulate a messenger app.
+<h5>holachatapp</h5> is the product based on React Native. It's supposed to emulate a messenger app.
 This app provides users with a chat interface and options to share images and their location.
 
 ## 🛠️ Build Tools
