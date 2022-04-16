@@ -9,12 +9,18 @@ import {
   Pressable,
   ImageBackground,
   Image,
-  TouchableOpacity
+  Platform,
 } from "react-native";
+
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 // importing images and icons
 import bgImage from "../assets/background-image.png";
 import icon from "../assets/usericon.png";
+
+import "firebase/firestore";
+
+
 
 export default class Start extends React.Component {
   constructor(props) {
@@ -22,8 +28,8 @@ export default class Start extends React.Component {
 
     // default background color
     this.state = {
-      username: "",
-      bgColor: this.colors.blue,
+      name: "",
+      bgColor: "",
     };
   }
 
@@ -34,14 +40,15 @@ export default class Start extends React.Component {
 
   // background colors to choose from; will be used to update bgColor state for easier referencing
   colors = {
-    earl: "#a4998c",
     // smoke: "#6E7376",
     // honey: "#d8b26e",
+    // rose: "#cebeb9"
+    earl: "#a4998c",
     mocha: "#514c4a",
     grass: "#3f5843",
-    // rose: "#cebeb9"
     orange: "#c78a44"
   };
+
 
   render() {
     return (
@@ -52,64 +59,79 @@ export default class Start extends React.Component {
           resizeMode="cover"
           style={styles.bgImage}>
 
+          {/* main title */}
           <View style={styles.titleBox}>
             <Text style={styles.titleText}></Text>
             <Text style={styles.miniText}></Text>
           </View>
 
+          {/* user box */}
           <View style={styles.box}>
             <View style={styles.inputBox}>
               <Image source={icon} style={styles.icon} />
+
               <TextInput
                 style={styles.input}
-                onChangeText={(text) => this.setState({ username: text })}
-                value={this.state.username}
+                onChangeText={(text) => this.setState({ name: text })}
+                value={this.state.name}
                 placeholder='Your Name'
               />
             </View>
 
             <View style={styles.colorBox}>
               <Text style={styles.colorText}> Pick a Background Color: </Text>
-            </View>
 
-            <View style={styles.colorList}>
+              <View style={styles.colorList}>
 
-              <TouchableOpacity
-                accesible={true}
-                accessibilityLabel="color1"
-                accessibilityHint="color1 as the background"
-                accessibilityRole="button"
-                style={styles.color1}
-                onPress={() => this.changeBgColor(this.colors.earl)}>
-              </TouchableOpacity>
+                <TouchableOpacity
+                  accesible={true}
+                  accessibilityLabel="color1"
+                  accessibilityHint="color1 as the background"
+                  accessibilityRole="button"
+                  onPress={() => {
+                    this.changeBgColor("#a4998c");
+                  }}
+                  style={[styles.earl]}
+                >
+                </TouchableOpacity>
 
-              <TouchableOpacity
-                accesible={true}
-                accessibilityLabel="color2"
-                accessibilityHint="color2 as the background"
-                accessibilityRole="button"
-                style={styles.color2}
-                onPress={() => this.changeBgColor(this.colors.mocha)}>
-              </TouchableOpacity>
+                <TouchableOpacity
+                  accesible={true}
+                  accessibilityLabel="color2"
+                  accessibilityHint="color2 as the background"
+                  accessibilityRole="button"
+                  onPress={() => {
+                    this.changeBgColor("#514c4a");
+                  }}
+                  style={[styles.mocha]}
+                >
+                </TouchableOpacity>
 
-              <TouchableOpacity
-                accesible={true}
-                accessibilityLabel="color3"
-                accessibilityHint="color3 as the background"
-                accessibilityRole="button"
-                style={styles.color3}
-                onPress={() => this.changeBgColor(this.colors.grass)}>
-              </TouchableOpacity>
+                <TouchableOpacity
+                  accesible={true}
+                  accessibilityLabel="color3"
+                  accessibilityHint="color3 as the background"
+                  accessibilityRole="button"
+                  onPress={() => {
+                    this.changeBgColor("#3f5843");
+                  }}
+                  style={[styles.grass]}
+                >
+                </TouchableOpacity>
 
-              <TouchableOpacity
-                accesible={true}
-                accessibilityLabel="color4"
-                accessibilityHint="color4 as the background"
-                accessibilityRole="button"
-                style={styles.color4}
-                onPress={() => this.changeBgColor(this.colors.orange)}>
-              </TouchableOpacity>
+                <TouchableOpacity
+                  accesible={true}
+                  accessibilityLabel="color4"
+                  accessibilityHint="color4 as the background"
+                  accessibilityRole="button"
+                  onPress={() => {
+                    this.changeBgColor("#c78a44");
+                  }}
+                  style={[styles.orange]}
+                >
+                </TouchableOpacity>
 
+              </View>
             </View>
 
             <Pressable
@@ -118,22 +140,30 @@ export default class Start extends React.Component {
               accessibilityHint="let you enter the Chatroom"
               accessibilityRole=""
               style={styles.button}
-              onPress={() => this.props.navigation.navigate('Chat', {
-                username: this.state.username,
-                bgColor: this.state.bgColor
-              })}>
+              onPress={() =>
+                this.props.navigation.navigate("Chat", {
+                  name: this.state.name,
+                  bgColor: this.state.bgColor
+                })
+              }
+            >
 
               <Text style={styles.buttonText}>Start Chatting</Text>
             </Pressable>
 
           </View>
-
+          {Platform.OS === "android" ? (
+            <KeyboardAvoidingView behavior="height" />
+          ) : null}
         </ImageBackground>
 
       </View>
     )
   }
 }
+
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -191,14 +221,17 @@ const styles = StyleSheet.create({
   image: {
     width: 20,
     height: 20,
-    marginRight: 10
+    marginRight: 10,
+    marginLeft: "30%"
   },
 
   input: {
+    marginLeft: 10,
     fontSize: 16,
     fontWeight: "400",
     opacity: 0.5,
   },
+
 
   colorBox: {
     marginRight: "auto",
@@ -206,9 +239,8 @@ const styles = StyleSheet.create({
     width: '88%'
   },
 
-// color for wording "Pick a Background"
+  // color for wording "Pick a Background"
   colorText: {
-    fontFamily: "Jost",
     fontSize: 16,
     fontWeight: "400",
     textTransform: "lowercase",
@@ -225,7 +257,7 @@ const styles = StyleSheet.create({
     paddingRight: 0
   },
 
-  color1: {
+  earl: {
     backgroundColor: "#a4998c",
     borderRadius: 20,
     marginTop: 10,
@@ -234,7 +266,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
 
-  color2: {
+  mocha: {
     backgroundColor: "#514c4a",
     borderRadius: 20,
     marginTop: 10,
@@ -243,7 +275,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
 
-  color3: {
+  grass: {
     backgroundColor: "#3f5843",
     borderRadius: 20,
     marginTop: 10,
@@ -252,7 +284,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
 
-  color4: {
+  orange: {
     backgroundColor: "#c78a44",
     borderRadius: 20,
     marginTop: 10,
@@ -284,7 +316,7 @@ const styles = StyleSheet.create({
     alignSelf: "auto",
     borderRadius: 25,
     flexDirection: "column",
-    height: 350,
+    height: 320,
     width: 350,
   },
 });
