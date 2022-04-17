@@ -32,6 +32,7 @@ There are several ways to see the frontpage of this app.
 <br>
 fyi, Browser (this app was tested on mac only)
 <br>
+
 * Open the app with the browser using http://localhost:19002 
 
 * Android Studio app on your pc
