@@ -29,8 +29,10 @@ Use command (expo start) to start the app
 
 <br>
 There are several ways to see the frontpage of this app.
-* Browser (this app was tested on mac only)
-Open the app with the browser using http://localhost:19002 
+<br>
+fyi,Browser (this app was tested on mac only)
+<br>
+*Open the app with the browser using http://localhost:19002 
 
 * Android Studio app on your pc
 
